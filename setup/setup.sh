@@ -31,10 +31,10 @@ sleep 2
 
 printf "Deploy the CSP Config Management operator across your Kubernetes clusters. \n"
 
-# for cluster in $(kubectx); 
-# do 
-#     kubectx $cluster && kubectl apply -f nomos-operator.yaml; 
-# done 
+for cluster in $(kubectx); 
+do 
+    kubectx $cluster && kubectl apply --filename nomos-operator.yaml; 
+done 
 
 printf "Observe the resources created across both clusters. \n"
 
@@ -69,7 +69,7 @@ read -n 1 -s -r -p "Once you have updated your GitHub SSH keys, press any key to
 
 sleep 2
 
-cd ../initech-corp/ && mkdir system && cd system
+cd ../initech-corp/system
 
 sleep 2
 
@@ -100,9 +100,22 @@ done
 
 sleep 2
 
-printf "Apply the Custom Resource to all of your clusters.\n"
+printf "Apply the ConfigManagement Custom Resource to each of your clusters.\n"
 
 for cluster in $(kubectx); 
 do
     kubectx $cluster && kubectl apply -f ./$cluster-config-management.yaml -n config-management-system; 
 done
+
+printf "You should have Your namespaces should now be synced across each cluster, which are noted in /initech-corp/namespaces. /dev is an abstract namespace with 5 dev namespaces and one aggregate resource quota shared across those 5 dev namespaces. /staging contains a single staging namespace. \n"
+
+for cluster in $(kubectx);
+do
+    kubectx $cluster && kubens;
+done
+
+sleep 3
+
+for cluster in $(kubectx);
+do
+    kubectx $cluster && kubectl describe resourcequota 
