@@ -1,5 +1,8 @@
 # Kubernetes Multi-Cluster Config Management with CSP
 
+Copyright 2019 Google LLC. This software is provided as-is, without warranty or representation for any use or purpose. Your use of it is subject to your agreements with Google. This is NOT a Google official product.
+
+
 This demo will utilize CSP Config Management to sync ClusterRoles and Namespaces across multiple clusters. It will also apply an Aggregate Resource Quota that will be collectively enforced across a group of namespaces in each cluster.
 
 ## Requirements
