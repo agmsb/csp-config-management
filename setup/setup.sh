@@ -128,8 +128,9 @@ do
     kubectx $cluster && kubens;
 done
 
-sleep 3
+sleep 10
 
 for cluster in $(kubectx);
 do
     kubectx $cluster && kubectl describe resourcequota
+done 
