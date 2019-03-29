@@ -125,6 +125,11 @@ EOM
 
 for cluster in $(kubectx);
 do
+    kubectx $cluster && kubectl get clusterrole pod-admin
+done
+
+for cluster in $(kubectx);
+do
     kubectx $cluster && kubens;
 done
 

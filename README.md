@@ -45,3 +45,4 @@ cd setup && chmod +x setup.sh  && ./setup.sh
 * Update setup with proper nomos-operator URL
 * Create ClusterRegistry resources
 * Set up nomos CLI + pre-commit hook
+* Set up with CSR
