@@ -4,8 +4,7 @@ This demo will utilize CSP Config Management to sync ClusterRoles and Namespaces
 
 ## Requirements
 
-* Google Cloud Project with Kubernetes Engine API enabled
-* 2 <= Kubernetes Clusters
+* 2 <= GKE Clusters
 * gcloud
 * kubectl
 * ssh-keygen
@@ -27,7 +26,7 @@ We will start by installing the necessary tooling on our workstation for our aut
 curl https://raw.githubusercontent.com/ahmetb/kubectx/master/kubectx > kubectx && curl https://raw.githubusercontent.com/ahmetb/kubectx/master/kubens > kubens && chmod u+x kubectx kubens && sudo mv kubectx /usr/local/bin && sudo mv kubens /usr/local/bin
 ```
 
-This demo assumes you already have multiple Kubernetes clusters in your kubeconfig on your local worksation. If you have not yet provisioned Kubernetes clusters, you can find the GKE quickstart [here](https://cloud.google.com/kubernetes-engine/docs/quickstart). Create multiple clusters, configure kubectl to access these clusters, and then return to these instructions.
+This demo assumes you already have multiple GKE clusters in your kubeconfig on your local worksation. If you have not yet provisioned these clusters, you can find the GKE quickstart [here](https://cloud.google.com/kubernetes-engine/docs/quickstart). Create 2 <= clusters, configure kubectl to access these clusters, and then return to these instructions.
 
 Once you have Kubernetes clusters in your local kubeconfig, navigate to `/setup`, make our setup.sh executable, and run it. 
 
