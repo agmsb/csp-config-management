@@ -59,11 +59,11 @@ done
 
 sleep 2
 
-printf "Log in to Github. Fork https://github.com/agmsb/csp-config-management"
-
-sleep 5
+printf "Log in to Github and fork https://github.com/agmsb/csp-config-management."
 
 read -n 1 -s -r -p "Once you have forked https://github.com/agmsb/csp-config-management, press any key to continue."
+
+sleep 3
 
 printf "\n"
 printf "Copy the below public key and paste it in GitHub > Settings > SSH and GPG keys > New SSH key \n\n"
@@ -116,10 +116,22 @@ done
 
 cat << EOM
 
-You should now have a ClusterRole in both clusters. 
-Your Namespaces should also be synced across each cluster, which is noted in /initech-corp/namespaces. 
-/dev is an Abstract Namespace that should have synced 5 dev Namespaces and one aggregate Resource Quota shared across those 5 dev Namespaces in each cluster. 
-/staging contains a single staging namespace that should also be synced across each cluster.
+CSP Config Managemeent should have propagated the below resources into each of your clusters:
+
+* ClusterRole named pod-admin with permissive role to manage pods.
+* Five dev-* Namespaces. This is made possible via initech-corp/namespaces/dev/dev-*, with one for each namespace.
+* One Aggregated Resource Quota. This is made possible via Abstract Namespaces in initech-corp/namespaces/dev. All namespaces in this Abstract Namespace contribute and are held to this shared quota.
+* One staging Namespace. This is made possible via initech-corp/namespaces/staging
+
+For all of the configs to propagate, this script will wait for 3 minutes.
+
+EOM
+
+sleep 120
+
+cat << EOM
+
+Observe the ClusterRole in each cluster.
 
 EOM
 
@@ -128,12 +140,29 @@ do
     kubectx $cluster && kubectl get clusterrole pod-admin
 done
 
+sleep 10
+
+cat << EOM
+
+Observe the namespaces in each cluster.
+
+EOM
+
+sleep 10
+
 for cluster in $(kubectx);
 do
     kubectx $cluster && kubens;
 done
 
 sleep 10
+
+
+cat << EOM
+
+Observe the Resource Quota in each cluster.
+
+EOM
 
 for cluster in $(kubectx);
 do
