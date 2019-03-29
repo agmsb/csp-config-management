@@ -59,7 +59,14 @@ done
 
 sleep 2
 
-printf "Log in to Github. Copy and paste the below public key in Settings > SSH and GPG keys > New SSH key \n\n"
+printf "Log in to Github. Fork https://github.com/agmsb/csp-config-management"
+
+sleep 5
+
+read -n 1 -s -r -p "Once you have forked https://github.com/agmsb/csp-config-management, press any key to continue."
+
+printf "\n"
+printf "Copy the below public key and paste it in GitHub > Settings > SSH and GPG keys > New SSH key \n\n"
 
 sleep 1 
 
