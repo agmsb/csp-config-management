@@ -114,7 +114,14 @@ do
     kubectx $cluster && kubectl apply -f ./$cluster-config-management.yaml -n config-management-system; 
 done
 
-printf "You should have Your namespaces should now be synced across each cluster, which are noted in /initech-corp/namespaces. /dev is an abstract namespace with 5 dev namespaces and one aggregate resource quota shared across those 5 dev namespaces. /staging contains a single staging namespace. \n"
+cat << EOM
+
+You should now have a ClusterRole in both clusters. 
+Your Namespaces should also be synced across each cluster, which is noted in /initech-corp/namespaces. 
+/dev is an Abstract Namespace that should have synced 5 dev Namespaces and one aggregate Resource Quota shared across those 5 dev Namespaces in each cluster. 
+/staging contains a single staging namespace that should also be synced across each cluster.
+
+EOM
 
 for cluster in $(kubectx);
 do
@@ -125,4 +132,4 @@ sleep 3
 
 for cluster in $(kubectx);
 do
-    kubectx $cluster && kubectl describe resourcequota 
+    kubectx $cluster && kubectl describe resourcequota
